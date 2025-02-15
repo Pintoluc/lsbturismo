@@ -7,7 +7,7 @@ function makeImgUrl(ref, maxquality) {
   const id = parts[1];
   const dimentions = parts[2];
   const format = parts[3];
-  const optimizedSize = maxquality && window.innerWidth > 700 ? "" : "&w=600";
+  const optimizedSize = maxquality ? "" : "&w=600";
   return `https://cdn.sanity.io/images/${studioId}/${studioDataset}/${id}-${dimentions}.${format}?fm=webp${optimizedSize}`;
 }
 const generateHtml = (data) => {
