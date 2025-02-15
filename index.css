@@ -228,7 +228,6 @@ h6 {
   grid-template-columns: 1fr;
   height: 100vh;
   height: 70svh;
-  background-image: url("./media/hero.webp");
   background-size: cover;
   background-position: 0 0px;
 }
