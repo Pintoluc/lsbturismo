@@ -2,12 +2,12 @@ const fs = require("fs");
 const studioId = "7cywyk0q";
 const studioDataset = "production";
 
-function makeImgUrl(ref) {
+function makeImgUrl(ref, maxquality) {
   const parts = ref.split("-");
   const id = parts[1];
   const dimentions = parts[2];
   const format = parts[3];
-  const optimizedSize = "&w=600";
+  const optimizedSize = maxquality ? "" : "&w=600";
   return `https://cdn.sanity.io/images/${studioId}/${studioDataset}/${id}-${dimentions}.${format}?fm=webp${optimizedSize}`;
 }
 const generateHtml = (data) => {
@@ -17,7 +17,7 @@ const generateHtml = (data) => {
   const gallery = data.filter((element) => element._type === "gallery");
 
   const logo = makeImgUrl(brand.favicon?.asset?._ref);
-  const heroImg = makeImgUrl(brand.hero?.asset?._ref);
+  const heroImg = makeImgUrl(brand.hero?.asset?._ref, true);
   const brandName = brand.title;
   const whatsapp = brand.whatsapp;
   const email = brand.email;
