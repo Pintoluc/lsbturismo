@@ -17,6 +17,7 @@ const generateHtml = (data) => {
   const gallery = data.filter((element) => element._type === "gallery");
 
   const logo = makeImgUrl(brand.favicon?.asset?._ref);
+  const heroImg = makeImgUrl(brand.hero?.asset?._ref);
   const brandName = brand.title;
   const whatsapp = brand.whatsapp;
   const email = brand.email;
@@ -245,7 +246,7 @@ const generateHtml = (data) => {
       <img class="logo" src=${logoTransparent} />
     </header>
     <main>
-      <div class="hero"></div>
+      <div class="hero" style="background-image: url(${heroImg}))"></div>
       <section class="intro">
         <h1 class="title">Descubre la Magia de Iguazú</h1>
         <p class="subtitle">¡Explora los Tres Lados de la Maravilla!</p>
