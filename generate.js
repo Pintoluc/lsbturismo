@@ -246,7 +246,7 @@ const generateHtml = (data) => {
       <img class="logo" src=${logoTransparent} />
     </header>
     <main>
-      <div class="hero" style="background-image: url(${heroImg}))"></div>
+      <div class="hero" style="background-image: url(${heroImg})"></div>
       <section class="intro">
         <h1 class="title">Descubre la Magia de Iguazú</h1>
         <p class="subtitle">¡Explora los Tres Lados de la Maravilla!</p>
