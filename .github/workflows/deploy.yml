@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  repository_dispatch:
+    types: [sanity_update]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: Clone gh-pages branch into dist
+        run: |
+          git clone --branch gh-pages https://github.com/${{ github.repository }} dist
+          ls -la dist  # Verifica el contenido actual de dist
+
+      - name: Generate new index.html
+        run: |
+          node generate.js
+          cp ./index.html dist/index.html  # Copia el index.html generado a la carpeta dist
+          ls -la dist  # Verifica que index.html esté en dist
+
+      - name: Commit and push changes to gh-pages
+        run: |
+          cd dist
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update index.html and other static files" || echo "No changes to commit"
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
